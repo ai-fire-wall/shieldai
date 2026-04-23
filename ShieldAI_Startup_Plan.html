@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShieldAI — Complete Startup Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #07080E;
+    --surface: #0E101A;
+    --surface2: #141728;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #E8EAF4;
+    --muted: #7B829E;
+    --dim: #3E4460;
+    --accent: #4F6EF7;
+    --accent2: #2DD4A0;
+    --red: #F05252;
+    --amber: #F5A623;
+    --purple: #9F7CF5;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── SIDEBAR NAV ─────────────────────────────── */
+  nav {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 240px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 32px 0;
+    z-index: 100;
+    overflow-y: auto;
+  }
+
+  .nav-logo {
+    padding: 0 24px 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .nav-logo .wordmark {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    display: block;
+  }
+
+  .nav-logo .tagline {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .nav-section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 24px;
+    margin: 16px 0 6px;
+  }
+
+  nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 24px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  nav a:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+  nav a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(79,110,247,0.06); }
+
+  .nav-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--dim);
+    min-width: 18px;
+  }
+
+  /* ── MAIN CONTENT ────────────────────────────── */
+  main { margin-left: 240px; }
+
+  /* ── HERO ────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 72px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(79,110,247,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: 200px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(45,212,160,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent2);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(52px, 7vw, 88px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 19px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 24px 0 48px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .hero-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 760px;
+  }
+
+  .hero-metric {
+    background: var(--surface);
+    padding: 22px 24px;
+  }
+
+  .hero-metric .value {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .hero-metric .label {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── SECTIONS ────────────────────────────────── */
+  section {
+    padding: 80px 72px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  section:target { scroll-margin-top: 40px; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 40px;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  h4 {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  p { color: var(--muted); margin-bottom: 12px; font-size: 14px; }
+
+  /* ── COMPONENTS ──────────────────────────────── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .card-accent { border-left: 3px solid; border-radius: 0 8px 8px 0; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  .tag-green { background: rgba(45,212,160,0.1); color: var(--accent2); }
+  .tag-blue { background: rgba(79,110,247,0.12); color: #7B9EFF; }
+  .tag-red { background: rgba(240,82,82,0.1); color: #F87171; }
+  .tag-amber { background: rgba(245,166,35,0.1); color: var(--amber); }
+  .tag-purple { background: rgba(159,124,245,0.1); color: var(--purple); }
+
+  .num-big {
+    font-family: var(--mono);
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+  /* ── BAR CHART ───────────────────────────────── */
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .bar-label { font-size: 12px; color: var(--muted); min-width: 130px; }
+  .bar-track { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; }
+  .bar-fill { height: 100%; border-radius: 3px; }
+  .bar-val { font-family: var(--mono); font-size: 11px; color: var(--muted); min-width: 40px; text-align: right; }
+
+  /* ── TIMELINE ────────────────────────────────── */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border2);
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 24px;
+    padding-bottom: 32px;
+    position: relative;
+  }
+
+  .tl-dot {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    border: 1px solid var(--border2);
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tl-body { flex: 1; padding-top: 8px; }
+
+  .tl-phase {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .tl-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .tl-desc { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+
+  .tl-tasks { list-style: none; }
+  .tl-tasks li {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .tl-tasks li::before {
+    content: '→';
+    color: var(--dim);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tl-tasks li:last-child { border-bottom: none; }
+
+  /* ── PRICING TABLE ───────────────────────────── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr 1fr;
+    gap: 16px;
+  }
+
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+  }
+
+  .price-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(160deg, rgba(79,110,247,0.06) 0%, var(--surface) 60%);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: white;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.06em;
+  }
+
+  .price-tier { font-size: 12px; color: var(--muted); margin-bottom: 8px; font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .price-amount { font-family: var(--serif); font-size: 44px; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .price-period { font-size: 12px; color: var(--dim); margin-bottom: 20px; }
+  .price-features { list-style: none; }
+  .price-features li { font-size: 13px; color: var(--muted); padding: 7px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; }
+  .price-features li::before { content: '✓'; color: var(--accent2); flex-shrink: 0; }
+  .price-features li:last-child { border-bottom: none; }
+
+  /* ── FINANCIAL TABLE ─────────────────────────── */
+  .fin-table { width: 100%; border-collapse: collapse; }
+  .fin-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dim);
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border2);
+    font-weight: 500;
+  }
+  .fin-table td { padding: 10px 14px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .fin-table td:first-child { color: var(--text); font-weight: 500; }
+  .fin-table td.num { font-family: var(--mono); font-size: 12px; }
+  .fin-table tr:last-child td { border-bottom: none; font-weight: 600; color: var(--text); }
+  .fin-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .positive { color: var(--accent2) !important; }
+  .negative { color: var(--red) !important; }
+
+  /* ── TEAM CARD ───────────────────────────────── */
+  .team-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .team-avatar {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .team-role { font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .team-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .team-bio { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+  .team-when { font-family: var(--mono); font-size: 10px; color: var(--dim); }
+
+  /* ── RISK TABLE ──────────────────────────────── */
+  .risk-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 80px 80px;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .risk-row:last-child { border-bottom: none; }
+  .risk-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .risk-desc { font-size: 12px; color: var(--muted); }
+  .risk-score {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-align: center;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  /* ── MOAT LIST ───────────────────────────────── */
+  .moat-item { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .moat-item:last-child { border-bottom: none; }
+  .moat-num { font-family: var(--serif); font-size: 36px; color: var(--surface2); flex-shrink: 0; width: 44px; line-height: 1; }
+  .moat-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .moat-desc { font-size: 13px; color: var(--muted); }
+
+  /* ── OKR TABLE ───────────────────────────────── */
+  .okr-quarter { margin-bottom: 32px; }
+  .okr-q-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .okr-objective { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .kr-list { list-style: none; }
+  .kr-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 5px 0;
+  }
+  .kr-list li::before { content: 'KR'; font-family: var(--mono); font-size: 9px; color: var(--dim); flex-shrink: 0; }
+
+  /* ── ACQUISITION TABLE ───────────────────────── */
+  .acq-row { display: grid; grid-template-columns: 160px 100px 1fr 120px; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); align-items: center; }
+  .acq-row:last-child { border-bottom: none; }
+  .acq-company { font-size: 13px; font-weight: 600; color: var(--text); }
+  .acq-mult { font-family: var(--mono); font-size: 13px; color: var(--accent2); }
+  .acq-why { font-size: 12px; color: var(--muted); }
+
+  /* ── PROGRESS BAR ────────────────────────────── */
+  .progress-row { margin-bottom: 16px; }
+  .progress-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .progress-label { font-size: 13px; color: var(--text); }
+  .progress-val { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .progress-track { height: 4px; background: var(--surface2); border-radius: 2px; }
+  .progress-fill { height: 100%; border-radius: 2px; }
+
+  /* ── FOOTER ──────────────────────────────────── */
+  footer {
+    padding: 60px 72px;
+    text-align: center;
+  }
+
+  footer .logo { font-family: var(--serif); font-size: 36px; color: var(--text); margin-bottom: 12px; }
+  footer p { font-size: 13px; color: var(--dim); }
+
+  /* ── ANIMATIONS ──────────────────────────────── */
+  @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-label { animation: fade-up 0.5s ease both; }
+  .hero h1 { animation: fade-up 0.5s 0.1s ease both; }
+  .hero-sub { animation: fade-up 0.5s 0.2s ease both; }
+  .hero-metrics { animation: fade-up 0.5s 0.3s ease both; }
+
+  /* ── PRINT-FRIENDLY PAGE BREAKS ──────────────── */
+  @media print { nav { display: none; } main { margin-left: 0; } section { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     SIDEBAR NAVIGATION
+═══════════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-logo">
+    <span class="wordmark">ShieldAI</span>
+    <span class="tagline">Startup Master Plan v1.0</span>
+  </div>
+
+  <div class="nav-section-label">Company</div>
+  <a href="#vision" onclick="setActive(this)"><span class="nav-num">01</span> Vision & positioning</a>
+  <a href="#problem" onclick="setActive(this)"><span class="nav-num">02</span> Problem & market</a>
+
+  <div class="nav-section-label">Product</div>
+  <a href="#product" onclick="setActive(this)"><span class="nav-num">03</span> Product definition</a>
+  <a href="#roadmap" onclick="setActive(this)"><span class="nav-num">04</span> Roadmap (18 mo)</a>
+  <a href="#moat" onclick="setActive(this)"><span class="nav-num">05</span> Competitive moat</a>
+
+  <div class="nav-section-label">Business</div>
+  <a href="#model" onclick="setActive(this)"><span class="nav-num">06</span> Business model</a>
+  <a href="#financials" onclick="setActive(this)"><span class="nav-num">07</span> Financial projections</a>
+  <a href="#gtm" onclick="setActive(this)"><span class="nav-num">08</span> Go-to-market</a>
+
+  <div class="nav-section-label">Operations</div>
+  <a href="#team" onclick="setActive(this)"><span class="nav-num">09</span> Team & hiring</a>
+  <a href="#okrs" onclick="setActive(this)"><span class="nav-num">10</span> OKRs & milestones</a>
+  <a href="#funding" onclick="setActive(this)"><span class="nav-num">11</span> Funding strategy</a>
+
+  <div class="nav-section-label">Strategy</div>
+  <a href="#risks" onclick="setActive(this)"><span class="nav-num">12</span> Risks & mitigations</a>
+  <a href="#exit" onclick="setActive(this)"><span class="nav-num">13</span> Exit strategy</a>
+  <a href="#action" onclick="setActive(this)"><span class="nav-num">14</span> First 30 days</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════════════ -->
+<main>
+
+<!-- ── HERO ──────────────────────────────────────── -->
+<div class="hero" id="top">
+  <div class="hero-label">Confidential · April 2026</div>
+
+  <h1>Shield<em>AI</em></h1>
+  <h1 style="color: var(--muted); font-size: clamp(28px, 4vw, 52px);">The firewall for AI.</h1>
+
+  <p class="hero-sub">
+    The only open-core security middleware that intercepts every AI prompt and response — blocking prompt injection, data leakage, and agent misuse before they cause damage. Built for developers. Trusted by enterprises.
+  </p>
+
+  <div class="hero-metrics">
+    <div class="hero-metric">
+      <div class="value" style="color: var(--red);">73%</div>
+      <div class="label">of production AI<br>deployments are vulnerable</div>
+    </div>
+    <div class="hero-metric">
+      <div class="value" style="color: var(--accent2);">$5.87B</div>
+      <div class="label">AI prompt security market<br>by 2029</div>
+    </div>
+    <div class="hero-metric">
+      <div class="value" style="color: var(--accent);">$550M</div>
+      <div class="label">paid for 2 startups in<br>6 weeks · Sept 2025</div>
+    </div>
+    <div class="hero-metric">
+      <div class="value" style="color: var(--purple);">$0</div>
+      <div class="label">dominant open-core<br>alternative today</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     01  VISION & POSITIONING
+══════════════════════════════════════════════════ -->
+<section id="vision">
+  <div class="section-label">01 — Vision & positioning</div>
+  <h2>The firewall every AI<br>deployment will need.</h2>
+
+  <div class="grid2" style="margin-bottom: 40px;">
+    <div>
+      <h3>Mission</h3>
+      <p>Make AI deployment safe by default. Every company that uses an LLM should have a security layer between their users and the model — just like every web server has a firewall. ShieldAI is that layer.</p>
+      <p>We are building the missing infrastructure of the AI era: the equivalent of Cloudflare for AI systems — a mandatory security layer that sits between applications and language models, making every AI interaction auditable, controllable, and safe.</p>
+
+      <hr class="divider">
+
+      <h3>One-line pitch</h3>
+      <div style="background: var(--surface2); border-left: 3px solid var(--accent); padding: 16px 20px; border-radius: 0 8px 8px 0; margin-top: 8px;">
+        <p style="font-size: 16px; color: var(--text); margin: 0; line-height: 1.5; font-style: italic;">"ShieldAI is the open-core security firewall for AI — we intercept every prompt and response, block attacks, redact secrets, and generate compliance evidence, so companies can deploy AI without becoming a breach headline."</p>
+      </div>
+    </div>
+
+    <div>
+      <h3>Positioning matrix</h3>
+      <div style="margin-bottom: 16px;">
+        <div class="bar-row"><span class="bar-label">Developer friendliness</span><div class="bar-track"><div class="bar-fill" style="width: 95%; background: var(--accent2);"></div></div><span class="bar-val" style="color: var(--accent2);">Best</span></div>
+        <div class="bar-row"><span class="bar-label">Detection accuracy</span><div class="bar-track"><div class="bar-fill" style="width: 90%; background: var(--accent);"></div></div><span class="bar-val">95%+</span></div>
+        <div class="bar-row"><span class="bar-label">MCP / agent support</span><div class="bar-track"><div class="bar-fill" style="width: 100%; background: var(--purple);"></div></div><span class="bar-val" style="color: var(--purple);">Only</span></div>
+        <div class="bar-row"><span class="bar-label">Compliance coverage</span><div class="bar-track"><div class="bar-fill" style="width: 85%; background: var(--accent);"></div></div><span class="bar-val">SOC2+</span></div>
+        <div class="bar-row"><span class="bar-label">Pricing accessibility</span><div class="bar-track"><div class="bar-fill" style="width: 100%; background: var(--accent2);"></div></div><span class="bar-val" style="color: var(--accent2);">Free tier</span></div>
+        <div class="bar-row"><span class="bar-label">Deployment flexibility</span><div class="bar-track"><div class="bar-fill" style="width: 92%; background: var(--amber);"></div></div><span class="bar-val">Cloud+self</span></div>
+      </div>
+      <p style="font-size: 12px;">Compared against: SentinelOne (Prompt Security), Check Point (Lakera), NeMo Guardrails, LlamaFirewall.</p>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <h4>Core belief</h4>
+      <h3>AI security is infrastructure, not a feature</h3>
+      <p>Just as SSL became mandatory, AI security middleware will become a non-negotiable layer for every production AI deployment. We're building the standard before the standard exists.</p>
+    </div>
+    <div class="card">
+      <h4>Business model belief</h4>
+      <h3>Open-core wins in security infrastructure</h3>
+      <p>HashiCorp Vault, Grafana, Supabase — the pattern is proven. Give away the core, sell the hosted cloud layer and enterprise compliance tier. Developer trust converts to enterprise contracts.</p>
+    </div>
+    <div class="card">
+      <h4>Timing belief</h4>
+      <h3>September 2025 opened the market</h3>
+      <p>Lakera ($300M exit) and Prompt Security ($250M exit) were absorbed by enterprise vendors. The developer-first, open-core slot is genuinely unoccupied. This window lasts 12–18 months.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     02  PROBLEM & MARKET
+══════════════════════════════════════════════════ -->
+<section id="problem">
+  <div class="section-label">02 — Problem & market</div>
+  <h2>Every AI system is deployed<br>without a safety layer.</h2>
+
+  <div class="grid2" style="margin-bottom: 40px;">
+    <div>
+      <h3>The core problem</h3>
+      <p>When companies deploy AI — a customer support bot, a coding assistant, a document analyser — they pipe user inputs directly to the LLM with zero inspection. The LLM responds and the output goes back to the user, again with zero inspection.</p>
+      <p>This creates three catastrophic attack surfaces simultaneously:</p>
+
+      <div style="margin: 16px 0;">
+        <div class="moat-item" style="padding: 14px 0;">
+          <div style="width: 40px; flex-shrink: 0; font-family: var(--mono); font-size: 11px; color: var(--red); padding-top: 2px;">IN</div>
+          <div>
+            <div class="moat-title">Malicious input (prompt injection)</div>
+            <div class="moat-desc">Attacker crafts a prompt that overrides the AI's instructions, causing it to ignore safety rules, leak data, or perform unauthorized actions.</div>
+          </div>
+        </div>
+        <div class="moat-item" style="padding: 14px 0;">
+          <div style="width: 40px; flex-shrink: 0; font-family: var(--mono); font-size: 11px; color: var(--amber); padding-top: 2px;">CTX</div>
+          <div>
+            <div class="moat-title">Contaminated context (indirect injection)</div>
+            <div class="moat-desc">Malicious instructions hidden in documents, emails, or web pages that AI agents read — invisible to users, but interpreted as commands by the model.</div>
+          </div>
+        </div>
+        <div class="moat-item" style="padding: 14px 0;">
+          <div style="width: 40px; flex-shrink: 0; font-family: var(--mono); font-size: 11px; color: var(--purple); padding-top: 2px;">OUT</div>
+          <div>
+            <div class="moat-title">Dangerous output (data leakage)</div>
+            <div class="moat-desc">LLM returns API keys, PII, internal system prompts, or harmful instructions that should never reach the user.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3>Real breach evidence (2025–2026)</h3>
+
+      <div class="card" style="margin-bottom: 10px; padding: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+          <span style="font-size: 13px; font-weight: 600;">EchoLeak — Microsoft 365 Copilot</span>
+          <span class="tag tag-red">2025</span>
+        </div>
+        <p style="font-size: 12px; margin: 0;">Zero-click prompt injection via email. Hidden instructions caused Copilot to silently exfiltrate enterprise data. No user action required.</p>
+      </div>
+
+      <div class="card" style="margin-bottom: 10px; padding: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+          <span style="font-size: 13px; font-weight: 600;">GitHub Copilot CVE-2025-53773</span>
+          <span class="tag tag-red">CVSS 9.6</span>
+        </div>
+        <p style="font-size: 12px; margin: 0;">Prompt injection in pull request descriptions → remote code execution with system privileges. 85%+ attack success rate against existing defenses.</p>
+      </div>
+
+      <div class="card" style="margin-bottom: 10px; padding: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+          <span style="font-size: 13px; font-weight: 600;">Samsung source code leak</span>
+          <span class="tag tag-amber">2023</span>
+        </div>
+        <p style="font-size: 12px; margin: 0;">Engineers pasted proprietary semiconductor code into ChatGPT. Data left Samsung's perimeter permanently. ChatGPT banned company-wide.</p>
+      </div>
+
+      <div class="card" style="padding: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+          <span style="font-size: 13px; font-weight: 600;">OpenClaw MCP crisis</span>
+          <span class="tag tag-purple">Feb 2026</span>
+        </div>
+        <p style="font-size: 12px; margin: 0;">135k-star OSS agent framework. 1,184 malicious MCP tool skills injected. 21,000 exposed instances. Credentials stolen via poisoned tool registry.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid4">
+    <div class="card">
+      <h4>Market size (TAM)</h4>
+      <div class="num-big" style="color: var(--accent2);">$5.87B</div>
+      <p style="font-size: 12px;">AI prompt security market by 2029, growing at 31.2% CAGR. Source: Research and Markets, Jan 2026.</p>
+    </div>
+    <div class="card">
+      <h4>Serviceable market (SAM)</h4>
+      <div class="num-big" style="color: var(--accent);">$800M</div>
+      <p style="font-size: 12px;">API-level runtime protection for developers + SMB to enterprise. Our addressable slice of TAM by 2028.</p>
+    </div>
+    <div class="card">
+      <h4>Initial target (SOM)</h4>
+      <div class="num-big" style="color: var(--purple);">$12M</div>
+      <p style="font-size: 12px;">Realistic ARR target by year 3 if we capture 1.5% of SAM with current product scope.</p>
+    </div>
+    <div class="card">
+      <h4>Urgency signal</h4>
+      <div class="num-big" style="color: var(--red);">72%</div>
+      <p style="font-size: 12px;">of organizations plan to deploy AI-specific firewalls within the next year. Source: Market survey 2025.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     03  PRODUCT DEFINITION
+══════════════════════════════════════════════════ -->
+<section id="product">
+  <div class="section-label">03 — Product definition</div>
+  <h2>Three products.<br>One platform.</h2>
+
+  <div class="grid3" style="margin-bottom: 40px;">
+    <div class="card" style="border-top: 3px solid var(--accent2);">
+      <span class="tag tag-green" style="margin-bottom: 14px; display: inline-flex;">Open source core</span>
+      <h3>ShieldAI OSS</h3>
+      <p>The input/output filter engine, ML classifier, and detection rule library. MIT licensed. Everything a developer needs to add AI security to their application in under 5 minutes.</p>
+      <hr class="divider">
+      <ul style="list-style: none; font-size: 12px; color: var(--muted);">
+        <li style="padding: 4px 0;">→ Regex-based injection detection (9 signature sets)</li>
+        <li style="padding: 4px 0;">→ TF-IDF + Logistic Regression ML classifier</li>
+        <li style="padding: 4px 0;">→ Output sanitizer + PII redaction</li>
+        <li style="padding: 4px 0;">→ MCP proxy layer (tool call interceptor)</li>
+        <li style="padding: 4px 0;">→ FastAPI proxy wrapper (1-line integration)</li>
+        <li style="padding: 4px 0;">→ pip install shieldai · npm install shieldai</li>
+      </ul>
+      <div style="margin-top: 14px; font-family: var(--mono); font-size: 11px; color: var(--dim);">Free forever · MIT License</div>
+    </div>
+
+    <div class="card" style="border-top: 3px solid var(--accent);">
+      <span class="tag tag-blue" style="margin-bottom: 14px; display: inline-flex;">Cloud SaaS</span>
+      <h3>ShieldAI Cloud</h3>
+      <p>The managed hosted version. One endpoint, zero infrastructure. Every request proxied, filtered, logged, and dashboard-visible. SOC2-ready audit trails included.</p>
+      <hr class="divider">
+      <ul style="list-style: none; font-size: 12px; color: var(--muted);">
+        <li style="padding: 4px 0;">→ Hosted proxy: api.shieldai.dev</li>
+        <li style="padding: 4px 0;">→ Real-time dashboard with threat analytics</li>
+        <li style="padding: 4px 0;">→ Persistent PostgreSQL log storage</li>
+        <li style="padding: 4px 0;">→ Redis rate limiting + abuse prevention</li>
+        <li style="padding: 4px 0;">→ Slack / PagerDuty alerting</li>
+        <li style="padding: 4px 0;">→ Multi-provider: OpenAI, Anthropic, Bedrock</li>
+      </ul>
+      <div style="margin-top: 14px; font-family: var(--mono); font-size: 11px; color: var(--dim);">$99 – $499/month</div>
+    </div>
+
+    <div class="card" style="border-top: 3px solid var(--purple);">
+      <span class="tag tag-purple" style="margin-bottom: 14px; display: inline-flex;">Enterprise</span>
+      <h3>ShieldAI Enterprise</h3>
+      <p>On-premise deployment for regulated industries. Runs inside your VPC, never calls home. Includes compliance report generation, custom ML model fine-tuning, and dedicated SLA.</p>
+      <hr class="divider">
+      <ul style="list-style: none; font-size: 12px; color: var(--muted);">
+        <li style="padding: 4px 0;">→ Helm chart for Kubernetes (single command)</li>
+        <li style="padding: 4px 0;">→ HIPAA / SOC2 / GDPR / ISO 42001 reports</li>
+        <li style="padding: 4px 0;">→ SAML SSO + RBAC access control</li>
+        <li style="padding: 4px 0;">→ Custom ML fine-tuning on your attack data</li>
+        <li style="padding: 4px 0;">→ Dedicated Slack / 4h response SLA</li>
+        <li style="padding: 4px 0;">→ Quarterly security review + red team</li>
+      </ul>
+      <div style="margin-top: 14px; font-family: var(--mono); font-size: 11px; color: var(--dim);">$4,000 – $15,000/month</div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom: 20px;">Full attack surface coverage</h3>
+  <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px;">
+    <div style="background: var(--surface2); border-radius: 8px; padding: 14px; text-align: center;">
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--red); margin-bottom: 6px; letter-spacing: 0.1em;">DIRECT</div>
+      <div style="font-size: 11px; color: var(--muted);">Prompt injection</div>
+    </div>
+    <div style="background: var(--surface2); border-radius: 8px; padding: 14px; text-align: center;">
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--amber); margin-bottom: 6px; letter-spacing: 0.1em;">INDIRECT</div>
+      <div style="font-size: 11px; color: var(--muted);">Context injection</div>
+    </div>
+    <div style="background: var(--surface2); border-radius: 8px; padding: 14px; text-align: center;">
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--purple); margin-bottom: 6px; letter-spacing: 0.1em;">AGENT</div>
+      <div style="font-size: 11px; color: var(--muted);">MCP tool poisoning</div>
+    </div>
+    <div style="background: var(--surface2); border-radius: 8px; padding: 14px; text-align: center;">
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--accent2); margin-bottom: 6px; letter-spacing: 0.1em;">DATA</div>
+      <div style="font-size: 11px; color: var(--muted);">Secret / PII leakage</div>
+    </div>
+    <div style="background: var(--surface2); border-radius: 8px; padding: 14px; text-align: center;">
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.1em;">JAILBREAK</div>
+      <div style="font-size: 11px; color: var(--muted);">DAN / persona escape</div>
+    </div>
+    <div style="background: var(--surface2); border-radius: 8px; padding: 14px; text-align: center;">
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--amber); margin-bottom: 6px; letter-spacing: 0.1em;">RAG</div>
+      <div style="font-size: 11px; color: var(--muted);">Retrieval poisoning</div>
+    </div>
+    <div style="background: var(--surface2); border-radius: 8px; padding: 14px; text-align: center;">
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--red); margin-bottom: 6px; letter-spacing: 0.1em;">MEMORY</div>
+      <div style="font-size: 11px; color: var(--muted);">Agent memory poison</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     04  ROADMAP
+══════════════════════════════════════════════════ -->
+<section id="roadmap">
+  <div class="section-label">04 — Product roadmap</div>
+  <h2>18 months to<br>enterprise-grade.</h2>
+
+  <div class="timeline">
+    <!-- Phase 0 -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background: var(--surface2); border-color: var(--accent2); color: var(--accent2);">Now</div>
+      <div class="tl-body">
+        <div class="tl-phase" style="color: var(--accent2);">Phase 0 — Baseline complete</div>
+        <div class="tl-title">MVP shipped: v0.2 complete</div>
+        <div class="tl-desc">Core filter engine, ML classifier, PostgreSQL logging, Redis rate limiter, React dashboard — all built and tested. 10/10 integration tests passing.</div>
+        <ul class="tl-tasks">
+          <li>FastAPI proxy with /v1/chat, /v1/stats, /v1/logs endpoints</li>
+          <li>Dual-layer detection: 9 injection patterns + TF-IDF/LR classifier (14/14 test accuracy)</li>
+          <li>Output sanitizer: leaked credentials + PII redaction</li>
+          <li>Docker + Alembic migrations ready for deployment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background: rgba(45,212,160,0.1); border-color: var(--accent2); color: var(--accent2);">M1–3</div>
+      <div class="tl-body">
+        <div class="tl-phase" style="color: var(--accent2);">Phase 1 — GitHub launch + developer traction</div>
+        <div class="tl-title">v0.3: MCP Gateway + Open Source Launch</div>
+        <div class="tl-desc">Publish to GitHub. Build the injection playground. Add MCP security proxy — the technical wedge that no competitor has open-sourced. Get first 1,000 GitHub stars.</div>
+        <ul class="tl-tasks">
+          <li>Publish to GitHub under MIT: full documentation, attack demo GIFs, quick-start guide</li>
+          <li>Build Injection Playground (like Lakera's Gandalf): free site, users test attack prompts against ShieldAI live</li>
+          <li>MCP Proxy Server: intercepts all tool calls between agents and MCP servers, scans inputs/outputs, flags anomalies</li>
+          <li>Tool registry validator: signature checking against known-safe MCP tool registry</li>
+          <li>Indirect injection scanner: scan RAG-retrieved documents and web pages for hidden instructions</li>
+          <li>Write "State of AI Prompt Injection 2026" research report — SEO + press engine</li>
+          <li>Post on HackerNews Show HN, r/netsec, r/MachineLearning</li>
+          <li><strong>Milestone: 1,000 GitHub stars, 500 free API users, 5 paying trial customers</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background: rgba(79,110,247,0.1); border-color: var(--accent); color: var(--accent);">M3–9</div>
+      <div class="tl-body">
+        <div class="tl-phase" style="color: var(--accent);">Phase 2 — Cloud SaaS + first revenue</div>
+        <div class="tl-title">v1.0: Production-grade Cloud Platform</div>
+        <div class="tl-desc">Stand up api.shieldai.dev. Add Stripe billing. List on AWS and Azure marketplaces. Convert free users to paying. Target: $15k MRR by month 9.</div>
+        <ul class="tl-tasks">
+          <li>Deploy to AWS (us-east-1 + eu-west-1) with 99.9% SLA — use Fly.io initially, migrate to EKS at scale</li>
+          <li>Stripe billing integration: free tier autoconverts, usage-based pricing for API calls</li>
+          <li>AWS Marketplace listing: enterprise buyers shop here with pre-approved cloud credits</li>
+          <li>Azure Marketplace listing: Microsoft-centric enterprises (a majority of enterprise)</li>
+          <li>Slack + PagerDuty alerting for real-time threat notifications</li>
+          <li>Multi-provider routing: OpenAI, Anthropic, Bedrock, Mistral — single API, any model</li>
+          <li>Agent monitoring dashboard: visualize MCP tool call graphs, flag anomalous patterns</li>
+          <li>First 10 paying customers via cold outreach to DevSecOps leads at AI-deploying startups</li>
+          <li><strong>Milestone: $15k MRR, 3 case studies published, listed on both cloud marketplaces</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background: rgba(159,124,245,0.1); border-color: var(--purple); color: var(--purple);">M9–15</div>
+      <div class="tl-body">
+        <div class="tl-phase" style="color: var(--purple);">Phase 3 — Enterprise motion + compliance</div>
+        <div class="tl-title">v1.5: On-Premise + Compliance Suite</div>
+        <div class="tl-desc">Pursue regulated industries: healthcare, legal, finance. Get SOC2 Type II. Launch Helm chart for on-premise. Land first enterprise contract. Hire first sales hire.</div>
+        <ul class="tl-tasks">
+          <li>SOC2 Type II certification: use Vanta to automate (~$10k/year). Non-negotiable for enterprise deals</li>
+          <li>Helm chart: one-command Kubernetes deployment inside customer's VPC</li>
+          <li>HIPAA compliance report generator: auto-produce AI interaction audit evidence</li>
+          <li>SAML SSO + RBAC: enterprise identity integration (Okta, Azure AD, Google Workspace)</li>
+          <li>Custom ML fine-tuning: train classifier on customer's own historical attack logs</li>
+          <li>Hire first enterprise sales rep (quota-carrying, earns their salary from first contract)</li>
+          <li>Partner with Accenture / Deloitte AI practices for SI referrals</li>
+          <li><strong>Milestone: 3 enterprise contracts at $8k+/month = $288k ARR from enterprise alone</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background: rgba(245,166,35,0.1); border-color: var(--amber); color: var(--amber);">M15–18</div>
+      <div class="tl-body">
+        <div class="tl-phase" style="color: var(--amber);">Phase 4 — Scale + Series A or acquisition</div>
+        <div class="tl-title">v2.0: AI Agent Security Platform</div>
+        <div class="tl-desc">Expand from "firewall" to full "AI security platform". Add agentic workflow monitoring, multi-agent security, and real-time behavioural anomaly detection. Series A or strategic acquisition.</div>
+        <ul class="tl-tasks">
+          <li>Agentic workflow graph: visualize agent-to-agent communication, flag trust boundary violations</li>
+          <li>Memory poisoning detection: monitor agent long-term memory writes for anomalous patterns</li>
+          <li>PromptGuard 2 integration: Meta's open-source jailbreak detector as additional ML layer</li>
+          <li>EU AI Act compliance module: specific controls required for high-risk AI by 2026 deadline</li>
+          <li>Raise $3–5M Series A OR begin acquisition conversations with Palo Alto, Zscaler, Wiz</li>
+          <li><strong>Milestone: $1M+ ARR, 10+ enterprise customers, clear path to $5M ARR</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     05  COMPETITIVE MOAT
+══════════════════════════════════════════════════ -->
+<section id="moat">
+  <div class="section-label">05 — Competitive moat</div>
+  <h2>Five compounding<br>advantages.</h2>
+
+  <div class="moat-item">
+    <div class="moat-num">01</div>
+    <div>
+      <div class="moat-title">Detection corpus compounds with every customer</div>
+      <div class="moat-desc">Every blocked attack gets anonymized and added to the training corpus for the ML classifier. Month 1: 97 injection samples. Month 18: 500,000+ real-world attacks. The classifier accuracy improves with scale in a way no competitor can replicate without our data. Lakera built 80M data points from Gandalf — that data was worth $300M at exit. We start building ours on day one.</div>
+    </div>
+  </div>
+
+  <div class="moat-item">
+    <div class="moat-num">02</div>
+    <div>
+      <div class="moat-title">MCP security is a first-mover opportunity</div>
+      <div class="moat-desc">The Model Context Protocol is now the standard for how AI agents call external tools. It's used by Claude, GPT-4o, Gemini, and every major agent framework. The OpenClaw crisis (Feb 2026) exposed 21,000 vulnerable instances. Nobody has an open-source MCP security gateway. We build it in Phase 1 and become the default reference implementation before anyone else realizes the opportunity.</div>
+    </div>
+  </div>
+
+  <div class="moat-item">
+    <div class="moat-num">03</div>
+    <div>
+      <div class="moat-title">Switching costs are embedded in the infrastructure</div>
+      <div class="moat-desc">Once a company routes their AI traffic through ShieldAI, the dashboard becomes their AI audit trail, the threat data is their compliance evidence, and the rules are tuned to their specific use case. Switching means losing months of threat intelligence and rebuilding their compliance documentation from zero. Infrastructure-layer software has 80–90% gross margins and near-zero churn for exactly this reason.</div>
+    </div>
+  </div>
+
+  <div class="moat-item">
+    <div class="moat-num">04</div>
+    <div>
+      <div class="moat-title">Open source creates distribution no budget can buy</div>
+      <div class="moat-desc">Lakera spent $23M in VC to acquire users. Our GitHub repo, published research reports, and Injection Playground create inbound users for free. A well-timed HackerNews post drives 10,000 visitors in 48 hours. A useful open-source tool stars organically. A security research report gets cited in articles. The open-core model converts developer trust into enterprise contracts — that trust cannot be purchased at any price.</div>
+    </div>
+  </div>
+
+  <div class="moat-item">
+    <div class="moat-num">05</div>
+    <div>
+      <div class="moat-title">Compliance integration is an enterprise lock-in</div>
+      <div class="moat-desc">The SOC2 audit logs, HIPAA evidence packs, and GDPR processing records we generate for enterprise customers are formal legal documentation. Once an enterprise uses ShieldAI's logs in their annual SOC2 audit, switching vendors means re-doing that audit with a new vendor's tooling. Compliance is the stickiest enterprise product category in software — ask any SIEM vendor.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     06  BUSINESS MODEL
+══════════════════════════════════════════════════ -->
+<section id="model">
+  <div class="section-label">06 — Business model</div>
+  <h2>Four revenue streams.<br>85% gross margin target.</h2>
+
+  <div class="grid2" style="margin-bottom: 40px;">
+    <div>
+      <h3>Revenue streams (priority order)</h3>
+      <div class="card card-accent" style="border-left-color: var(--accent2); margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <h4 style="margin: 0;">1. SaaS subscriptions</h4>
+          <span class="tag tag-green">Primary · 60% of revenue</span>
+        </div>
+        <p style="font-size: 13px; margin: 0;">Recurring monthly revenue. Predictable. High LTV. Grows with customer's AI usage volume. The backbone of the business.</p>
+      </div>
+      <div class="card card-accent" style="border-left-color: var(--accent); margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <h4 style="margin: 0;">2. Enterprise contracts</h4>
+          <span class="tag tag-blue">Primary · 30% of revenue</span>
+        </div>
+        <p style="font-size: 13px; margin: 0;">Annual contracts at $48k–180k/year. On-premise deployment for regulated industries. Single enterprise deal equals 100 Starter plan customers.</p>
+      </div>
+      <div class="card card-accent" style="border-left-color: var(--amber); margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <h4 style="margin: 0;">3. Usage-based (per-million tokens)</h4>
+          <span class="tag tag-amber">Growth · 7% of revenue</span>
+        </div>
+        <p style="font-size: 13px; margin: 0;">$0.50 per 1M tokens screened for high-volume customers who prefer pay-as-you-go. Aligns cost with value. Eliminates budget objections from volume users.</p>
+      </div>
+      <div class="card card-accent" style="border-left-color: var(--purple);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <h4 style="margin: 0;">4. Compliance reports (add-on)</h4>
+          <span class="tag tag-purple">Add-on · 3% of revenue</span>
+        </div>
+        <p style="font-size: 13px; margin: 0;">$200–500/month for automated SOC2, HIPAA, GDPR AI evidence packs. Compliance teams pay almost anything for audit-ready documentation.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-tier">Starter</div>
+          <div class="price-amount">$99</div>
+          <div class="price-period">per month</div>
+          <ul class="price-features">
+            <li>100k requests/month</li>
+            <li>Input + output filter</li>
+            <li>7-day log retention</li>
+            <li>API key auth</li>
+            <li>Basic dashboard</li>
+          </ul>
+          <div style="margin-top: 16px; font-family: var(--mono); font-size: 10px; color: var(--dim);">Target: indie devs, small startups</div>
+        </div>
+
+        <div class="price-card featured">
+          <div class="featured-badge">Most popular</div>
+          <div class="price-tier">Business</div>
+          <div class="price-amount">$499</div>
+          <div class="price-period">per month</div>
+          <ul class="price-features">
+            <li>2M requests/month</li>
+            <li>ML classifier included</li>
+            <li>MCP agent monitoring</li>
+            <li>90-day log retention</li>
+            <li>Slack + PagerDuty alerts</li>
+            <li>SOC2 audit export</li>
+          </ul>
+          <div style="margin-top: 16px; font-family: var(--mono); font-size: 10px; color: var(--dim);">Target: Series A–B startups</div>
+        </div>
+
+        <div class="price-card">
+          <div class="price-tier">Enterprise</div>
+          <div class="price-amount" style="font-size: 32px;">Custom</div>
+          <div class="price-period">from $4,000/month</div>
+          <ul class="price-features">
+            <li>Unlimited requests</li>
+            <li>On-premise / VPC</li>
+            <li>HIPAA · SOC2 · GDPR</li>
+            <li>SAML SSO + RBAC</li>
+            <li>Custom ML training</li>
+            <li>4h SLA · Dedicated support</li>
+          </ul>
+          <div style="margin-top: 16px; font-family: var(--mono); font-size: 10px; color: var(--dim);">Target: healthcare, legal, finance</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 16px; padding: 18px;">
+        <h4>Unit economics</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px;">
+          <div>
+            <div style="font-size: 11px; color: var(--dim); margin-bottom: 3px;">Target gross margin</div>
+            <div style="font-family: var(--mono); font-size: 20px; color: var(--accent2);">85%</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; color: var(--dim); margin-bottom: 3px;">COGS per request</div>
+            <div style="font-family: var(--mono); font-size: 20px; color: var(--accent);">$0.00004</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; color: var(--dim); margin-bottom: 3px;">Target LTV:CAC</div>
+            <div style="font-family: var(--mono); font-size: 20px; color: var(--purple);">8:1</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; color: var(--dim); margin-bottom: 3px;">Avg enterprise ACV</div>
+            <div style="font-family: var(--mono); font-size: 20px; color: var(--amber);">$96k</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     07  FINANCIAL PROJECTIONS
+══════════════════════════════════════════════════ -->
+<section id="financials">
+  <div class="section-label">07 — Financial projections</div>
+  <h2>Path to $1M ARR<br>in 18 months.</h2>
+
+  <div class="grid2" style="margin-bottom: 32px;">
+    <div>
+      <h3>Monthly ARR growth model</h3>
+      <table class="fin-table" style="margin-top: 8px;">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th class="num">Starter</th>
+            <th class="num">Business</th>
+            <th class="num">Enterprise</th>
+            <th class="num">MRR</th>
+            <th class="num">ARR run rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>M3</td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num positive">$297</td><td class="num positive">$3.6k</td></tr>
+          <tr><td>M6</td><td class="num">12</td><td class="num">4</td><td class="num">0</td><td class="num positive">$3,184</td><td class="num positive">$38k</td></tr>
+          <tr><td>M9</td><td class="num">28</td><td class="num">14</td><td class="num">1</td><td class="num positive">$12,788</td><td class="num positive">$153k</td></tr>
+          <tr><td>M12</td><td class="num">45</td><td class="num">28</td><td class="num">3</td><td class="num positive">$42,427</td><td class="num positive">$509k</td></tr>
+          <tr><td>M15</td><td class="num">65</td><td class="num">45</td><td class="num">6</td><td class="num positive">$72,910</td><td class="num positive">$875k</td></tr>
+          <tr><td>M18</td><td class="num">85</td><td class="num">62</td><td class="num">10</td><td class="num positive">$105,915</td><td class="num positive">$1.27M</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h3>Cost structure (bootstrapped scenario)</h3>
+      <table class="fin-table" style="margin-top: 8px;">
+        <thead>
+          <tr>
+            <th>Expense</th>
+            <th class="num">Month 1–6</th>
+            <th class="num">Month 7–12</th>
+            <th class="num">Month 13–18</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Infrastructure (AWS/Fly)</td><td class="num">$200</td><td class="num">$800</td><td class="num">$2,500</td></tr>
+          <tr><td>Tooling (Vanta, GitHub, etc.)</td><td class="num">$150</td><td class="num">$1,200</td><td class="num">$2,000</td></tr>
+          <tr><td>Founder salary</td><td class="num">$3,000</td><td class="num">$5,000</td><td class="num">$8,000</td></tr>
+          <tr><td>First engineer hire</td><td class="num">$0</td><td class="num">$7,000</td><td class="num">$9,000</td></tr>
+          <tr><td>Sales / marketing</td><td class="num">$300</td><td class="num">$500</td><td class="num">$2,000</td></tr>
+          <tr><td>Legal / accounting</td><td class="num">$200</td><td class="num">$400</td><td class="num">$800</td></tr>
+          <tr><td><strong>Total monthly burn</strong></td><td class="num negative">$3,850</td><td class="num negative">$14,900</td><td class="num negative">$24,300</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 12px; padding: 12px; background: rgba(45,212,160,0.06); border: 1px solid rgba(45,212,160,0.15); border-radius: 8px;">
+        <div style="font-size: 12px; color: var(--accent2);">Cash flow positive at month 12 if 3+ enterprise contracts close. With $50k savings runway, the business reaches ramen-profitability before needing outside funding.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom: 16px;">18-month ARR waterfall to $1M+</h3>
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <div class="progress-row">
+      <div class="progress-header">
+        <span class="progress-label">Month 6 — First real revenue</span>
+        <span class="progress-val" style="color: var(--accent2);">$38k ARR</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width: 3%; background: var(--accent2);"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-header">
+        <span class="progress-label">Month 9 — AWS Marketplace live</span>
+        <span class="progress-val" style="color: var(--accent2);">$153k ARR</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width: 12%; background: var(--accent2);"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-header">
+        <span class="progress-label">Month 12 — First enterprise contracts</span>
+        <span class="progress-val" style="color: var(--accent);">$509k ARR</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width: 40%; background: var(--accent);"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-header">
+        <span class="progress-label">Month 15 — Series A territory</span>
+        <span class="progress-val" style="color: var(--purple);">$875k ARR</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width: 69%; background: var(--purple);"></div></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-header">
+        <span class="progress-label">Month 18 — $1M+ ARR milestone</span>
+        <span class="progress-val" style="color: var(--amber);">$1.27M ARR</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width: 100%; background: var(--amber);"></div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     08  GO-TO-MARKET
+══════════════════════════════════════════════════ -->
+<section id="gtm">
+  <div class="section-label">08 — Go-to-market</div>
+  <h2>Developer-led growth.<br>Enterprise upsell.</h2>
+
+  <div class="grid2" style="margin-bottom: 32px;">
+    <div>
+      <h3>The growth loop</h3>
+      <div style="background: var(--surface2); border-radius: 12px; padding: 24px; margin-bottom: 16px;">
+        <div style="display: flex; flex-direction: column; gap: 0;">
+          <div style="display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border);">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(45,212,160,0.15); border: 1px solid var(--accent2); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--accent2); flex-shrink: 0;">1</div>
+            <div style="font-size: 13px; color: var(--muted);">Developer discovers ShieldAI on GitHub or via Injection Playground</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border);">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(79,110,247,0.12); border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--accent); flex-shrink: 0;">2</div>
+            <div style="font-size: 13px; color: var(--muted);">Installs pip package, adds to their AI app in 5 minutes, starts free tier</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border);">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(159,124,245,0.1); border: 1px solid var(--purple); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--purple); flex-shrink: 0;">3</div>
+            <div style="font-size: 13px; color: var(--muted);">Dashboard shows blocked attacks → developer becomes internal champion</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border);">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(245,166,35,0.1); border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--amber); flex-shrink: 0;">4</div>
+            <div style="font-size: 13px; color: var(--muted);">Manager asks "do we have AI security controls?" → developer emails ShieldAI link</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; padding: 10px 0;">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(240,82,82,0.1); border: 1px solid var(--red); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--red); flex-shrink: 0;">5</div>
+            <div style="font-size: 13px; color: var(--muted);">Company upgrades to Business → CISO asks for on-premise → Enterprise contract</div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size: 12px;">This is the PLG (Product-Led Growth) motion. The developer discovers, uses, and evangelizes — the enterprise sales cycle starts from a warm inbound referral, not a cold call. Average sales cycle: 3 weeks for Business, 6–10 weeks for Enterprise.</p>
+    </div>
+
+    <div>
+      <h3>Channel strategy</h3>
+      <div class="card" style="margin-bottom: 10px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <h4 style="margin: 0;">GitHub + open source</h4>
+          <span class="tag tag-green">Free · Highest ROI</span>
+        </div>
+        <p style="font-size: 12px; margin: 0;">Target: 5,000 stars by month 6. Stars = credibility = inbound. Study: Supabase went from 0 to $80M ARR primarily through GitHub virality.</p>
+      </div>
+      <div class="card" style="margin-bottom: 10px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <h4 style="margin: 0;">Injection Playground</h4>
+          <span class="tag tag-blue">Free · Viral</span>
+        </div>
+        <p style="font-size: 12px; margin: 0;">Like Lakera's Gandalf. Free game where users try to extract a secret from our AI firewall. Goes viral in security communities. Builds attack corpus + brand awareness simultaneously.</p>
+      </div>
+      <div class="card" style="margin-bottom: 10px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <h4 style="margin: 0;">Cloud marketplaces</h4>
+          <span class="tag tag-amber">Paid · High leverage</span>
+        </div>
+        <p style="font-size: 12px; margin: 0;">AWS + Azure Marketplace listings. Enterprise buyers spend pre-approved cloud credits here. 10–30% cut worth the distribution access. Zero outbound required for inbound leads.</p>
+      </div>
+      <div class="card" style="margin-bottom: 10px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <h4 style="margin: 0;">Research content</h4>
+          <span class="tag tag-purple">Free · Long-term</span>
+        </div>
+        <p style="font-size: 12px; margin: 0;">"State of AI Security 2026" report. Original data from injection corpus. Gets cited in press, linked from OWASP, invited to speak at conferences. This is how you become the reference authority.</p>
+      </div>
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <h4 style="margin: 0;">Targeted cold outreach</h4>
+          <span class="tag tag-amber">Paid · Scalable</span>
+        </div>
+        <p style="font-size: 12px; margin: 0;">Target: companies that posted "AI Security Engineer" roles in last 90 days. They have budget allocated. Apollo.io + LinkedIn outreach to CTOs. 200 emails → 15 demos → 4 pays.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom: 16px;">ICP (Ideal Customer Profile)</h3>
+  <div class="grid3">
+    <div class="card" style="border-top: 2px solid var(--red);">
+      <h4 style="color: var(--red);">Tier 1 — Highest priority</h4>
+      <h3>Regulated industry enterprises</h3>
+      <ul style="font-size: 12px; color: var(--muted); padding-left: 14px; margin-top: 8px;">
+        <li>Healthcare orgs deploying AI assistants (HIPAA mandate)</li>
+        <li>Law firms using AI for document analysis</li>
+        <li>Financial services with AI-powered advisors</li>
+        <li>Deal size: $8,000–$15,000/month</li>
+        <li>Sales cycle: 6–10 weeks</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top: 2px solid var(--accent);">
+      <h4 style="color: var(--accent);">Tier 2 — Growth market</h4>
+      <h3>Series A–C SaaS with AI features</h3>
+      <ul style="font-size: 12px; color: var(--muted); padding-left: 14px; margin-top: 8px;">
+        <li>B2B SaaS adding AI assistant features</li>
+        <li>Need SOC2 evidence for enterprise customers</li>
+        <li>Engineering team 10–50 people</li>
+        <li>Deal size: $499–$2,000/month</li>
+        <li>Sales cycle: 2–3 weeks</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top: 2px solid var(--accent2);">
+      <h4 style="color: var(--accent2);">Tier 3 — Volume base</h4>
+      <h3>Developer teams + AI startups</h3>
+      <ul style="font-size: 12px; color: var(--muted); padding-left: 14px; margin-top: 8px;">
+        <li>Indie developers and AI startups</li>
+        <li>Discovered via GitHub or HN</li>
+        <li>Self-serve, no human involved</li>
+        <li>Deal size: $99–$499/month</li>
+        <li>Sales cycle: same day (Stripe)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     09  TEAM & HIRING
+══════════════════════════════════════════════════ -->
+<section id="team">
+  <div class="section-label">09 — Team & hiring plan</div>
+  <h2>Right people.<br>Right time.</h2>
+
+  <p style="margin-bottom: 32px; max-width: 600px;">The founding team needs to cover: product engineering (ML + backend), go-to-market, and security domain credibility. Hiring happens in lockstep with revenue milestones — not before.</p>
+
+  <div class="grid2" style="margin-bottom: 32px;">
+    <div>
+      <h3 style="margin-bottom: 16px;">Founding team (day 0)</h3>
+      <div class="team-card" style="margin-bottom: 12px;">
+        <div class="team-avatar">F</div>
+        <div class="team-role">Co-founder · CEO</div>
+        <div class="team-name">Founder / You</div>
+        <div class="team-bio">Owns product vision, GTM strategy, enterprise sales, investor relations. Background: software engineering + business. Has built the full MVP stack. Understands the security problem deeply from building it.</div>
+        <div class="team-when">Day 0</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">C</div>
+        <div class="team-role">Co-founder · CTO</div>
+        <div class="team-name">Technical Co-founder</div>
+        <div class="team-bio">Owns engineering architecture, ML model development, and infrastructure scaling. Ideally: prior experience in cybersecurity or AI safety. Compensated with 15–25% equity if pre-revenue join.</div>
+        <div class="team-when">Ideally by month 1 — non-negotiable to scale</div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom: 16px;">Hiring roadmap (post-revenue)</h3>
+      <div class="team-card" style="margin-bottom: 12px;">
+        <div class="team-role">Hire 1</div>
+        <div class="team-name">Senior Full-Stack Engineer</div>
+        <div class="team-bio">Python backend + React frontend. Helps build v1.0 Cloud SaaS layer, dashboard improvements, Helm chart. Salary: $90–110k. Hire when MRR hits $8k (covers salary).</div>
+        <div class="team-when">Month 6–7 · $90–110k · 1.5% equity</div>
+      </div>
+
+      <div class="team-card" style="margin-bottom: 12px;">
+        <div class="team-role">Hire 2</div>
+        <div class="team-name">Enterprise Sales Rep (quota-carrying)</div>
+        <div class="team-bio">Focused exclusively on enterprise deals ($8k+/month). Must have prior security software sales experience. Earns their salary from first contract closed. OTE: $120–140k (50% base, 50% commission).</div>
+        <div class="team-when">Month 9–10 · OTE $130k · 0.5% equity</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-role">Hire 3</div>
+        <div class="team-name">ML Security Engineer</div>
+        <div class="team-bio">Specialises in attack detection model improvement, red-teaming our own system, and building the fine-tuning pipeline for enterprise customers. This is what makes the product defensible at scale.</div>
+        <div class="team-when">Month 12–14 · $110–130k · 1% equity</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4>Equity structure guidance</h4>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 8px;">
+      <div>
+        <div style="font-size: 11px; color: var(--dim); margin-bottom: 4px;">Founder 1 (CEO)</div>
+        <div style="font-family: var(--mono); font-size: 20px; color: var(--text);">45–50%</div>
+      </div>
+      <div>
+        <div style="font-size: 11px; color: var(--dim); margin-bottom: 4px;">Founder 2 (CTO)</div>
+        <div style="font-family: var(--mono); font-size: 20px; color: var(--text);">35–40%</div>
+      </div>
+      <div>
+        <div style="font-size: 11px; color: var(--dim); margin-bottom: 4px;">Employee pool</div>
+        <div style="font-family: var(--mono); font-size: 20px; color: var(--text);">10–15%</div>
+      </div>
+      <div>
+        <div style="font-size: 11px; color: var(--dim); margin-bottom: 4px;">Advisors</div>
+        <div style="font-family: var(--mono); font-size: 20px; color: var(--text);">1–2%</div>
+      </div>
+    </div>
+    <p style="font-size: 12px; margin-top: 12px; margin-bottom: 0;">Use a standard 4-year vesting schedule with a 1-year cliff for all equity grants. Delaware C-Corp structure from day one — required for investor funding and acquisition readiness.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     10  OKRs & MILESTONES
+══════════════════════════════════════════════════ -->
+<section id="okrs">
+  <div class="section-label">10 — OKRs & milestones</div>
+  <h2>Measurable targets.<br>Quarter by quarter.</h2>
+
+  <div class="okr-quarter">
+    <div class="okr-q-label">Q1 2026 (months 1–3) · GitHub launch + developer traction</div>
+    <div class="okr-objective">Become the default open-source AI security tool developers discover.</div>
+    <ul class="kr-list">
+      <li>1,000 GitHub stars by end of month 3</li>
+      <li>500 free-tier API users signed up</li>
+      <li>MCP security gateway shipped and documented</li>
+      <li>Injection Playground live with 2,000+ unique users in first month</li>
+      <li>One technical blog post per week (security research content)</li>
+      <li>5 paying trial customers (Starter plan), even at $0 if pilot discounted</li>
+    </ul>
+  </div>
+
+  <div class="okr-quarter">
+    <div class="okr-q-label">Q2 2026 (months 4–6) · SaaS launch + first real revenue</div>
+    <div class="okr-objective">Turn the developer community into a revenue engine.</div>
+    <ul class="kr-list">
+      <li>api.shieldai.dev live with 99.9% uptime SLA</li>
+      <li>Stripe billing live: Starter + Business plans purchasable without human interaction</li>
+      <li>AWS Marketplace listing approved and live</li>
+      <li>$5,000 MRR achieved (50 Starter customers OR 10 Business customers)</li>
+      <li>First case study published (customer allows logo usage)</li>
+      <li>Indirect injection scanner shipped (RAG chunk + URL scanning)</li>
+    </ul>
+  </div>
+
+  <div class="okr-quarter">
+    <div class="okr-q-label">Q3 2026 (months 7–9) · Scale SaaS + enter enterprise motion</div>
+    <div class="okr-objective">Cross $15k MRR and close the first enterprise conversation.</div>
+    <ul class="kr-list">
+      <li>$15,000 MRR (sustainable business foundation)</li>
+      <li>Azure Marketplace listing live (second cloud marketplace)</li>
+      <li>First enterprise pilot contract signed (even at heavy discount for logo)</li>
+      <li>SOC2 Type II certification process started with Vanta</li>
+      <li>3,000+ GitHub stars · 2,000+ active free API users</li>
+      <li>"State of AI Security 2026" original research report published and getting press coverage</li>
+    </ul>
+  </div>
+
+  <div class="okr-quarter">
+    <div class="okr-q-label">Q4 2026 (months 10–12) · Enterprise closes + product-market fit</div>
+    <div class="okr-objective">Validate enterprise motion and demonstrate repeatable revenue growth.</div>
+    <ul class="kr-list">
+      <li>3 enterprise contracts signed at $8,000+/month each</li>
+      <li>$40,000+ MRR ($480k ARR run rate)</li>
+      <li>SOC2 Type II certification complete</li>
+      <li>Helm chart for on-premise deployment shipped and tested with at least 1 enterprise customer</li>
+      <li>Sales rep hired and ramping</li>
+      <li>NPS score from paying customers above 40</li>
+    </ul>
+  </div>
+
+  <div class="okr-quarter">
+    <div class="okr-q-label">Q1–Q2 2027 (months 13–18) · Scale to $1M ARR</div>
+    <div class="okr-objective">Reach $1M ARR milestone and prepare for Series A or acquisition.</div>
+    <ul class="kr-list">
+      <li>$1,000,000+ ARR (12-month trailing)</li>
+      <li>10 enterprise customers on annual contracts</li>
+      <li>Gross margin at 80%+ (software-only unit economics proven)</li>
+      <li>Series A term sheet OR initial acquisition conversations with strategic buyers</li>
+      <li>EU AI Act compliance module shipped ahead of enforcement deadline</li>
+      <li>ML classifier accuracy above 98% (from growing attack corpus)</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     11  FUNDING STRATEGY
+══════════════════════════════════════════════════ -->
+<section id="funding">
+  <div class="section-label">11 — Funding strategy</div>
+  <h2>Bootstrap to traction.<br>Raise on your terms.</h2>
+
+  <div class="grid2" style="margin-bottom: 32px;">
+    <div>
+      <h3>Phase A — Bootstrapped (months 1–9)</h3>
+      <p>The existing MVP is built. Infrastructure cost is ~$200/month. With a modest runway of $30–50k in savings, the company can reach $15k MRR before needing outside capital. This is the ideal path — arrive at fundraising with revenue, not just a pitch deck.</p>
+
+      <div class="card card-accent" style="border-left-color: var(--accent2); margin: 16px 0;">
+        <h4>Why bootstrap first</h4>
+        <ul style="font-size: 12px; color: var(--muted); padding-left: 14px;">
+          <li>Maintain full equity control during de-risking phase</li>
+          <li>Fundraising with $15k MRR gets 3× better terms than pre-revenue</li>
+          <li>Proves the business model before taking dilution</li>
+          <li>Infrastructure is cheap: ML classifier + FastAPI + Fly.io = ~$200/month</li>
+        </ul>
+      </div>
+
+      <h3>Phase B — Pre-Seed / Angel (month 6–9)</h3>
+      <p>If growth is accelerating but more capital would unlock faster enterprise sales, raise $300–500k from angels and pre-seed funds. Use for: first sales hire, AWS/Azure marketplace fees, SOC2 certification, and 6 months of founder salary.</p>
+
+      <div class="card" style="margin-top: 12px;">
+        <h4>Target investors for pre-seed</h4>
+        <ul style="font-size: 12px; color: var(--muted); padding-left: 14px;">
+          <li>YC-backed founders who understand developer tools</li>
+          <li>CISOs from Fortune 500 companies (strategic angels)</li>
+          <li>Cybersecurity-focused angels (ex-Palo Alto, CrowdStrike operators)</li>
+          <li>Indie.vc or Calm Company Fund (revenue-based financing options)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <h3>Phase C — Series A (month 12–15, if needed)</h3>
+      <p>At $500k–$800k ARR with clear enterprise motion, a Series A of $3–5M is realistic. Comparable: Prompt Security raised $23M total and exited for $250M (10× return). We aim to raise less, build more.</p>
+
+      <div class="card" style="margin-bottom: 12px;">
+        <h4>Use of Series A funds</h4>
+        <div style="margin-top: 8px;">
+          <div class="bar-row"><span class="bar-label">Sales team (2–3 AEs)</span><div class="bar-track"><div class="bar-fill" style="width: 40%; background: var(--accent);"></div></div><span class="bar-val">40%</span></div>
+          <div class="bar-row"><span class="bar-label">Engineering (ML + infra)</span><div class="bar-track"><div class="bar-fill" style="width: 30%; background: var(--purple);"></div></div><span class="bar-val">30%</span></div>
+          <div class="bar-row"><span class="bar-label">Marketing + content</span><div class="bar-track"><div class="bar-fill" style="width: 15%; background: var(--accent2);"></div></div><span class="bar-val">15%</span></div>
+          <div class="bar-row"><span class="bar-label">Compliance certs</span><div class="bar-track"><div class="bar-fill" style="width: 10%; background: var(--amber);"></div></div><span class="bar-val">10%</span></div>
+          <div class="bar-row"><span class="bar-label">Legal + operational</span><div class="bar-track"><div class="bar-fill" style="width: 5%; background: var(--red);"></div></div><span class="bar-val">5%</span></div>
+        </div>
+      </div>
+
+      <div class="card card-accent" style="border-left-color: var(--accent);">
+        <h4>Target Series A investors</h4>
+        <ul style="font-size: 12px; color: var(--muted); padding-left: 14px;">
+          <li>Cybersecurity-focused VCs: Ten Eleven Ventures, DataTribe, Cyber Mentor Fund</li>
+          <li>Developer-tools VCs: Boldstart, Heavybit, Gradient Ventures (Google)</li>
+          <li>Generalist: Sequoia Arc, a16z, Unusual Ventures</li>
+          <li>Strategic: Corporate VCs from Palo Alto Networks, CrowdStrike, Cisco</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     12  RISKS & MITIGATIONS
+══════════════════════════════════════════════════ -->
+<section id="risks">
+  <div class="section-label">12 — Risks & mitigations</div>
+  <h2>Known risks.<br>Clear mitigations.</h2>
+
+  <div style="margin-bottom: 8px; display: grid; grid-template-columns: 180px 1fr 80px 80px; gap: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border2);">
+    <div style="font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase;">Risk</div>
+    <div style="font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase;">Mitigation</div>
+    <div style="font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; text-align: center;">Likelihood</div>
+    <div style="font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; text-align: center;">Impact</div>
+  </div>
+
+  <div class="risk-row">
+    <div><div class="risk-name">OpenAI / Anthropic builds native guardrails</div></div>
+    <div class="risk-desc">Model providers cannot be provider-neutral — a company using 3 LLMs needs one firewall across all of them. We build for multi-provider from day one. Our MCP proxy works regardless of which model is called.</div>
+    <div class="risk-score" style="background: rgba(245,166,35,0.1); color: var(--amber);">Medium</div>
+    <div class="risk-score" style="background: rgba(79,110,247,0.1); color: #7B9EFF;">Low</div>
+  </div>
+
+  <div class="risk-row">
+    <div><div class="risk-name">Palo Alto / Wiz launches competing product</div></div>
+    <div class="risk-desc">Large security vendors move slowly. Our open-source distribution and developer brand builds a moat they cannot buy. When they do enter, the market expands — rising tide lifts all boats. Most likely outcome: they acquire us.</div>
+    <div class="risk-score" style="background: rgba(245,166,35,0.1); color: var(--amber);">Medium</div>
+    <div class="risk-score" style="background: rgba(245,166,35,0.1); color: var(--amber);">Medium</div>
+  </div>
+
+  <div class="risk-row">
+    <div><div class="risk-name">Attack patterns evolve faster than detection</div></div>
+    <div class="risk-desc">This is actually our business model advantage — the threat never goes away, so the subscription never cancels. We build a weekly retraining pipeline: every blocked attack improves the model. Community can submit new attack signatures to the open-source repo.</div>
+    <div class="risk-score" style="background: rgba(240,82,82,0.1); color: #F87171;">High</div>
+    <div class="risk-score" style="background: rgba(79,110,247,0.1); color: #7B9EFF;">Low</div>
+  </div>
+
+  <div class="risk-row">
+    <div><div class="risk-name">Enterprise sales cycle too long for cashflow</div></div>
+    <div class="risk-desc">Maintain SaaS revenue as the base — don't depend on enterprise for survival. Each Starter and Business customer covers months of infrastructure cost. Enterprise is upside, not the floor. Bootstrap to $15k MRR before depending on enterprise revenue.</div>
+    <div class="risk-score" style="background: rgba(245,166,35,0.1); color: var(--amber);">Medium</div>
+    <div class="risk-score" style="background: rgba(245,166,35,0.1); color: var(--amber);">Medium</div>
+  </div>
+
+  <div class="risk-row">
+    <div><div class="risk-name">Solo founder execution risk</div></div>
+    <div class="risk-desc">Recruiting a technical co-founder is the single most critical action. Offer 20–30% equity to the right person immediately. In parallel, find 2 advisors in cybersecurity (0.25% each) who can open enterprise doors and validate technical credibility.</div>
+    <div class="risk-score" style="background: rgba(240,82,82,0.1); color: #F87171;">High</div>
+    <div class="risk-score" style="background: rgba(240,82,82,0.1); color: #F87171;">High</div>
+  </div>
+
+  <div class="risk-row">
+    <div><div class="risk-name">False positives block legitimate users</div></div>
+    <div class="risk-desc">Threshold set conservatively at 0.55 (not 0.5). Regex layer only blocks deterministic signatures with zero false-positive risk. ML layer escalates but operators can override. Build an "allowlist" system for enterprise customers to tune their own thresholds.</div>
+    <div class="risk-score" style="background: rgba(79,110,247,0.1); color: #7B9EFF;">Low</div>
+    <div class="risk-score" style="background: rgba(240,82,82,0.1); color: #F87171;">High</div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     13  EXIT STRATEGY
+══════════════════════════════════════════════════ -->
+<section id="exit">
+  <div class="section-label">13 — Exit strategy</div>
+  <h2>Three exit paths.<br>All validated by 2025.</h2>
+
+  <p style="margin-bottom: 32px; max-width: 640px;">The September 2025 acquisition wave proved the exit playbook. Prompt Security: 2 years old, $23M raised → $250M exit (10× investor return). Lakera → $300M. CalypsoAI → $180M. The acquirer universe is large and motivated.</p>
+
+  <div class="grid3" style="margin-bottom: 40px;">
+    <div class="card" style="border-top: 2px solid var(--red);">
+      <span class="tag tag-red" style="margin-bottom: 12px; display: inline-flex;">Path A</span>
+      <h3>Strategic acquisition</h3>
+      <p>Acquired by a cybersecurity or cloud platform vendor who needs AI security capabilities. Target acquirers are actively buying in this space.</p>
+      <hr class="divider">
+      <p style="font-size: 12px;">Timeline: 24–36 months after launch. Trigger: $3–5M ARR with strong enterprise logos. Valuation multiple: 8–15× ARR for security software = $24M–$75M exit.</p>
+    </div>
+    <div class="card" style="border-top: 2px solid var(--accent);">
+      <span class="tag tag-blue" style="margin-bottom: 12px; display: inline-flex;">Path B</span>
+      <h3>Series A → independent growth</h3>
+      <p>Raise $5–10M Series A at month 15. Scale sales team aggressively. Build toward $10M ARR and Series B. Path to public markets or larger strategic acquisition at scale.</p>
+      <hr class="divider">
+      <p style="font-size: 12px;">Timeline: 4–6 years. Trigger: $800k ARR + growing. Valuation multiple: $50–150M at Series B. $300M–500M at IPO or late-stage acquisition.</p>
+    </div>
+    <div class="card" style="border-top: 2px solid var(--accent2);">
+      <span class="tag tag-green" style="margin-bottom: 12px; display: inline-flex;">Path C</span>
+      <h3>Profitable independence</h3>
+      <p>Reach $3–5M ARR with 80%+ gross margins. Run as a profitable, founder-controlled business. Generate significant personal wealth without dilution or investor timelines.</p>
+      <hr class="divider">
+      <p style="font-size: 12px;">Timeline: 3–4 years. Trigger: $500k ARR cash-flow positive. At $3M ARR and 80% GM, the business generates $2M+/year in profit with a small team.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom: 16px;">Target acquirers (ranked by strategic fit)</h3>
+  <div style="border: 1px solid var(--border); border-radius: 10px; overflow: hidden;">
+    <div style="background: var(--surface2); display: grid; grid-template-columns: 160px 100px 1fr 120px; gap: 16px; padding: 10px 20px; border-bottom: 1px solid var(--border2);">
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase;">Company</div>
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase;">ARR multiple</div>
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase;">Why they'd buy</div>
+      <div style="font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase;">Precedent</div>
+    </div>
+    <div style="padding: 0 20px;">
+      <div class="acq-row">
+        <div class="acq-company">Palo Alto Networks</div>
+        <div class="acq-mult">12–18×</div>
+        <div class="acq-why">PANW is buying every AI security company available. Has an "AI Security" product line gap. $3.7B in M&A spending power per year.</div>
+        <div><span class="tag tag-red">Most likely</span></div>
+      </div>
+      <div class="acq-row">
+        <div class="acq-company">Wiz</div>
+        <div class="acq-mult">10–15×</div>
+        <div class="acq-why">Wiz secures cloud infrastructure. AI security is the natural adjacency. They have $1B+ to deploy and haven't made an AI security acquisition yet.</div>
+        <div><span class="tag tag-amber">High fit</span></div>
+      </div>
+      <div class="acq-row">
+        <div class="acq-company">Zscaler</div>
+        <div class="acq-mult">10–14×</div>
+        <div class="acq-why">Zero-trust network vendor. "AI firewall" is a zero-trust concept applied to AI interactions. Natural platform extension for their enterprise customers.</div>
+        <div><span class="tag tag-amber">High fit</span></div>
+      </div>
+      <div class="acq-row">
+        <div class="acq-company">Datadog</div>
+        <div class="acq-mult">12–16×</div>
+        <div class="acq-why">Observability platform adding security. AI security monitoring is their exact adjacency. We fit naturally into their LLM observability product strategy.</div>
+        <div><span class="tag tag-blue">Medium fit</span></div>
+      </div>
+      <div class="acq-row" style="border-bottom: none;">
+        <div class="acq-company">CrowdStrike</div>
+        <div class="acq-mult">10–14×</div>
+        <div class="acq-why">Falcón platform + AI security = logical pairing. CrowdStrike has been vocal about AI security as strategic priority in 2026.</div>
+        <div><span class="tag tag-blue">Medium fit</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     14  FIRST 30 DAYS
+══════════════════════════════════════════════════ -->
+<section id="action">
+  <div class="section-label">14 — First 30 days</div>
+  <h2>Day-by-day playbook.<br>Starting now.</h2>
+
+  <div class="grid2">
+    <div>
+      <div class="card card-accent" style="border-left-color: var(--accent2); margin-bottom: 16px;">
+        <h4>Week 1: Ship to GitHub</h4>
+        <ul class="tl-tasks" style="margin-top: 8px;">
+          <li>Register ShieldAI as a company name (Delaware C-Corp via Stripe Atlas, $500)</li>
+          <li>Create GitHub org: github.com/shieldai</li>
+          <li>Write the README — install guide, attack demo GIFs, architecture diagram, roadmap</li>
+          <li>Publish to GitHub with MIT license</li>
+          <li>Post to HackerNews: "Show HN: I built an open-source AI security firewall with MCP support"</li>
+          <li>Post to r/netsec, r/MachineLearning, r/artificial</li>
+          <li>Submit to OWASP community forums</li>
+        </ul>
+      </div>
+
+      <div class="card card-accent" style="border-left-color: var(--accent); margin-bottom: 16px;">
+        <h4>Week 2: Start the injection playground</h4>
+        <ul class="tl-tasks" style="margin-top: 8px;">
+          <li>Buy domain: shieldai.dev (or shieldai.com)</li>
+          <li>Build playground.shieldai.dev — users type attack prompts, firewall blocks/passes in real-time</li>
+          <li>Add a "score counter" — how many attacks has the community tried</li>
+          <li>Make it shareable: "I tried X attacks and Y were blocked"</li>
+          <li>Tweet/post the playground link to AI security Twitter community</li>
+        </ul>
+      </div>
+
+      <div class="card card-accent" style="border-left-color: var(--purple); margin-bottom: 16px;">
+        <h4>Week 3: MCP gateway + indirect injection</h4>
+        <ul class="tl-tasks" style="margin-top: 8px;">
+          <li>Build the MCP proxy server (Python, intercepts tool calls)</li>
+          <li>Add RAG chunk scanner (scan retrieved documents before injection into context)</li>
+          <li>Write a technical blog post: "Securing MCP: The Tool-Call Attack Surface Nobody Is Talking About"</li>
+          <li>Submit blog post to HackerNews, The Register, SecurityWeek</li>
+        </ul>
+      </div>
+
+      <div class="card card-accent" style="border-left-color: var(--amber);">
+        <h4>Week 4: First paying customers + co-founder search</h4>
+        <ul class="tl-tasks" style="margin-top: 8px;">
+          <li>Email 50 developers who starred the repo: offer 3-month free trial of Cloud tier in exchange for feedback</li>
+          <li>Post in AI Engineer, DevSecOps, and LLM application communities with "beta user" offer</li>
+          <li>Set up Stripe — even if charging $1 to start, the payment rails need to be live</li>
+          <li>Start co-founder search: post in YC co-founder matching, Lunchclub, LinkedIn</li>
+          <li>Target for co-founder: ex-CrowdStrike/Palo Alto engineer OR ML security researcher</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom: 16px;">30-day success metrics</h3>
+      <div class="card" style="margin-bottom: 12px;">
+        <div class="progress-row">
+          <div class="progress-header">
+            <span class="progress-label">GitHub stars</span>
+            <span class="progress-val">Target: 300+</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width: 0%; background: var(--accent2);"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-header">
+            <span class="progress-label">Free API signups</span>
+            <span class="progress-val">Target: 100+</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width: 0%; background: var(--accent);"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-header">
+            <span class="progress-label">Injection Playground users</span>
+            <span class="progress-val">Target: 500+</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width: 0%; background: var(--purple);"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-header">
+            <span class="progress-label">Beta feedback interviews</span>
+            <span class="progress-val">Target: 10+</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width: 0%; background: var(--amber);"></div></div>
+        </div>
+        <div class="progress-row" style="margin-bottom: 0;">
+          <div class="progress-header">
+            <span class="progress-label">Co-founder conversations</span>
+            <span class="progress-val">Target: 5+</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" style="width: 0%; background: var(--red);"></div></div>
+        </div>
+      </div>
+
+      <div class="card" style="background: rgba(79,110,247,0.06); border-color: rgba(79,110,247,0.2);">
+        <h4 style="color: var(--accent);">The one thing that matters most</h4>
+        <p style="font-size: 13px; color: var(--text); margin-bottom: 8px;">Get to GitHub. Everything else flows from that.</p>
+        <p style="font-size: 13px; color: var(--muted); margin: 0;">Every day the repo isn't public is a day you're not building: a star count, a user base, a detection corpus, a brand. The code is done. The product works. The market is open. The only thing standing between you and traction is publishing.</p>
+      </div>
+
+      <div style="margin-top: 16px; padding: 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface2);">
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">The startup equation</div>
+        <div style="font-family: var(--serif); font-size: 20px; color: var(--text); line-height: 1.4;">
+          Working product<br>
+          + Open-source trust<br>
+          + Unoccupied market<br>
+          + Right timing<br>
+          <span style="color: var(--accent);">= Execute now.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ─────────────────────────────────────── -->
+<footer>
+  <div class="logo">ShieldAI</div>
+  <p>Confidential — For internal planning purposes only.</p>
+  <p style="margin-top: 8px; font-family: var(--mono); font-size: 11px;">v1.0 · April 2026 · Built with thinking.</p>
+</footer>
+
+</main>
+
+<script>
+  function setActive(el) {
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Auto-highlight nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => {
+          a.classList.remove('active');
+          if (a.getAttribute('href') === '#' + id) a.classList.add('active');
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
