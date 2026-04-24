@@ -2,7 +2,6 @@ services:
   - type: web
     name: shieldai-api
     runtime: python
-    runtimeVersion: "3.12"
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
@@ -11,8 +10,6 @@ services:
         fromDatabase:
           name: shieldai-db
           property: connectionString
-      - key: REDIS_URL
-        value: ""
       - key: OPENAI_API_KEY
         sync: false
       - key: ANTHROPIC_API_KEY
@@ -24,5 +21,5 @@ services:
 
 databases:
   - name: shieldai-db
-    engine: postgres
     plan: free
+    ipWhitelist: []
