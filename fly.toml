@@ -1,0 +1,10 @@
+app = "shieldai"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  LOG_LEVEL = "INFO"
+
+[http_service]
+  internal_port = 8000

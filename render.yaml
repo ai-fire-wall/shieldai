@@ -1,24 +1,103 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# ShieldAI — Render Blueprint
+# This file defines the entire infrastructure for one-click deployment.
+#
+# Deploy steps:
+#   1. Push this repo to GitHub
+#   2. Go to dashboard.render.com → New → Blueprint
+#   3. Connect your GitHub repo → Render reads this file and creates everything
+# ──────────────────────────────────────────────────────────────────────────────
+
 services:
+  # ── FastAPI application ─────────────────────────────────────────────────────
   - type: web
     name: shieldai-api
-    runtime: python
-    plan: free
-    buildCommand: pip install -r requirements-prod.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free                         # change to starter ($7/mo) for no cold starts
+    healthCheckPath: /health
+    autoDeploy: true                   # redeploys automatically on git push
+
     envVars:
+      # App
+      - key: APP_NAME
+        value: ShieldAI
+      - key: APP_VERSION
+        value: "0.2.0"
+      - key: DEBUG
+        value: "false"
+
+      # Database — Render injects DATABASE_URL automatically from the DB below
       - key: DATABASE_URL
         fromDatabase:
           name: shieldai-db
           property: connectionString
+
+      # Redis — Render injects REDIS_URL automatically from the Redis below
+      - key: REDIS_URL
+        fromService:
+          name: shieldai-redis
+          type: redis
+          property: connectionString
+
+      # LLM keys — set these manually in the Render dashboard after deploy
       - key: OPENAI_API_KEY
-        sync: false
+        sync: false                    # marks as secret — you fill this in dashboard
       - key: ANTHROPIC_API_KEY
         sync: false
-      - key: LOG_LEVEL
-        value: info
-      - key: DEBUG
-        value: "false"
 
+      # Auth — comma-separated API keys for your callers
+      # Set this in the Render dashboard under Environment
+      - key: API_KEYS_RAW
+        sync: false
+
+      # Rate limiting
+      - key: RATE_LIMIT_PER_MINUTE
+        value: "60"
+
+      # Feature flags
+      - key: LOG_TO_DB
+        value: "true"
+      - key: BLOCK_ON_HIGH_THREAT
+        value: "true"
+      - key: REDACT_PII_DEFAULT
+        value: "true"
+
+  # ── React Dashboard ─────────────────────────────────────────────────────────
+  - type: web
+    name: shieldai-dashboard
+    runtime: static
+    buildCommand: cd dashboard && npm install && npm run build
+    staticPublishPath: ./dashboard/dist
+    plan: free
+    pullRequestPreviewsEnabled: true
+
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: shieldai-api
+          type: web
+          property: host
+
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html      # SPA routing — all paths go to React
+
+# ── Managed PostgreSQL ─────────────────────────────────────────────────────────
 databases:
   - name: shieldai-db
-    plan: free
+    plan: free                        # 1GB storage, 90-day free trial
+    databaseName: shieldai
+    user: shieldai
+
+# ── Managed Redis ─────────────────────────────────────────────────────────────
+# Note: Redis on Render requires a paid plan ($10/month).
+# On the free plan, the rate limiter silently fails open (requests still work).
+# See README for free Redis alternatives.
+# Uncomment below when you upgrade:
+
+# - type: redis
+#   name: shieldai-redis
+#   plan: starter
+#   maxmemoryPolicy: allkeys-lru

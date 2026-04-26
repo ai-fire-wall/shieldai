@@ -1,16 +1,12 @@
 """
-main.py — FastAPI application entry point (v0.2)
-
-New in v0.2:
-  - PostgreSQL persistence via SQLAlchemy async sessions
-  - Redis rate-limiting middleware
-  - GET /v1/logs   — recent request log (for dashboard)
-  - GET /v1/stats  — now queries DB for 24h window metrics + hourly series
+main.py — FastAPI application entry point.
+Render-compatible: reads PORT from environment, auto-runs DB migrations on startup.
 """
 
 from __future__ import annotations
 
 import asyncio
+import os
 import time
 from collections import defaultdict
 from contextlib import asynccontextmanager
@@ -43,20 +39,21 @@ _mem_stats: dict[str, Any] = defaultdict(int)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info(f"AI Security Firewall v{settings.app_version} starting")
+    # ── Startup ──────────────────────────────────────────────────────────────
+    logger.info(f"{settings.app_name} v{settings.app_version} starting")
     _mem_stats["started_at"] = time.time()
 
+    # Warm up ML classifier (trains in ~80ms, done once at startup)
     await asyncio.get_event_loop().run_in_executor(None, get_classifier)
-    logger.info("ML classifier warmed up")
+    logger.info("ML classifier ready")
 
+    # Auto-create DB tables on startup (safe to run multiple times)
     if settings.log_to_db:
-        try:
-            await init_db()
-        except Exception as exc:
-            logger.error(f"DB init failed — running without persistence: {exc}")
+        await init_db()
 
     yield
 
+    # ── Shutdown ──────────────────────────────────────────────────────────────
     await close_db()
     await close_redis()
     logger.info("Shutdown complete")
@@ -65,7 +62,10 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
-    description="Middleware security layer intercepting AI prompts and responses.",
+    description=(
+        "Open-core AI security firewall. Intercepts every prompt and response, "
+        "blocking prompt injection, data leakage, and harmful outputs."
+    ),
     lifespan=lifespan,
 )
 
@@ -78,6 +78,8 @@ app.add_middleware(
 app.add_middleware(RateLimiterMiddleware)
 
 
+# ── Auth ───────────────────────────────────────────────────────────────────────
+
 async def _check_auth(request: Request) -> None:
     if not settings.api_keys:
         return
@@ -86,8 +88,11 @@ async def _check_auth(request: Request) -> None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid or missing API key.")
 
 
+# ── Routes ─────────────────────────────────────────────────────────────────────
+
 @app.get("/health", response_model=HealthResponse, tags=["ops"])
 async def health():
+    """Liveness probe — Render pings this to verify the service is up."""
     return HealthResponse(
         status="ok",
         version=settings.app_version,
@@ -102,8 +107,7 @@ async def stats(
 ):
     try:
         db_stats = await repository.get_stats(session, hours=hours)
-        uptime = round(time.time() - _mem_stats.get("started_at", time.time()), 1)
-        return {"uptime_seconds": uptime, **db_stats}
+        return {"uptime_seconds": round(time.time() - _mem_stats.get("started_at", time.time()), 1), **db_stats}
     except Exception as exc:
         logger.error(f"Stats query failed: {exc}")
         total = _mem_stats["total"]
@@ -127,7 +131,7 @@ async def logs(
     try:
         rows = await repository.get_recent_logs(
             session, limit=limit,
-            allowed_only=(False if blocked_only else None)
+            allowed_only=(False if blocked_only else None),
         )
         return {"logs": rows, "count": len(rows)}
     except Exception as exc:
@@ -141,6 +145,10 @@ async def chat(
     request: Request,
     session: AsyncSession = Depends(get_session),
 ):
+    """
+    Main firewall endpoint.
+    Drop-in replacement for OpenAI/Anthropic — change one URL in your code.
+    """
     await _check_auth(request)
     _mem_stats["total"] += 1
 
@@ -159,6 +167,10 @@ async def chat(
     return result
 
 
+# ── Entry point ────────────────────────────────────────────────────────────────
+# Render sets PORT automatically. We read it here so gunicorn can use it.
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("app.main:app", host="0.0.0.0", port=port, reload=False)

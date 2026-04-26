@@ -1,11 +1,26 @@
 """
-Configuration — loaded from environment variables with safe defaults.
-Copy .env.example to .env and fill in your values.
+Configuration — loaded from environment variables.
+Render injects DATABASE_URL, REDIS_URL, and PORT automatically.
+Copy .env.example to .env for local development.
 """
 
+import os
 from functools import lru_cache
 from typing import List
 from pydantic_settings import BaseSettings
+
+
+def _fix_db_url(url: str) -> str:
+    """
+    Render (and Heroku) provide postgres:// URLs.
+    asyncpg requires postgresql+asyncpg://.
+    This fixes it automatically regardless of what Render injects.
+    """
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+    elif url.startswith("postgresql://") and "+asyncpg" not in url:
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    return url
 
 
 class Settings(BaseSettings):
@@ -19,12 +34,20 @@ class Settings(BaseSettings):
     anthropic_api_key: str = ""
 
     # ── Database ──────────────────────────────────────────────────────────────
+    # Render injects DATABASE_URL automatically when you attach a Postgres DB
     database_url: str = "postgresql+asyncpg://shieldai:shieldai@localhost:5432/shieldai"
+
+    @property
+    def async_database_url(self) -> str:
+        return _fix_db_url(self.database_url)
+
+    # ── Cache ─────────────────────────────────────────────────────────────────
+    # Render injects REDIS_URL automatically when you attach a Redis instance
     redis_url: str = "redis://localhost:6379/0"
 
     # ── Auth ──────────────────────────────────────────────────────────────────
     api_key_header: str = "X-ShieldAI-Key"
-    # Comma-separated list of valid API keys; empty = no auth (dev mode)
+    # Comma-separated list of valid caller API keys; empty = no auth (dev mode)
     api_keys_raw: str = ""
 
     @property
